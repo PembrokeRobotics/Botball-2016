@@ -105,9 +105,9 @@ BEGIN CREATE FUNCTIONS
  */
  void create_disconnect();
 '''
- def create_disconnect:
-     '"disconnects the create"'
-     _create.create_disconnect()
+def create_disconnect:
+    '"disconnects the create"'
+    _create.create_disconnect()
 
 def create_start:
     "starts the create"
@@ -359,8 +359,8 @@ def get_create_requested_right_velocity:
 def get_create_requested_left_velocity:
     return int(_create.get_create_requested_left_velocity)
 
- def create_stop:
-     _create.create_stop()
+def create_stop:
+    _create.create_stop()
 
 @accepts(int, int)
 @cast_to(c_int, c_int)
@@ -385,7 +385,7 @@ def create_spin_CCW(speed):
 @accepts(int, int)
 @cast_to(c_int, c_int)
 def create_drive_direct(l_speed, r_speed):
-     _create.create_drive_direct(l_speed, r_speed)
+    _create.create_drive_direct(l_speed, r_speed)
 
 @accepts(int, int)
 @cast_to(c_int, c_int)
@@ -444,4 +444,4 @@ def create_write_byte(byte):
     _create.create_write_byte(byte)
 
 def create_clear_serial_buffer:
-  _create.create_clear_serial_buffer()
+    _create.create_clear_serial_buffer()
