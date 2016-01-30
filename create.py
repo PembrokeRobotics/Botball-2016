@@ -266,7 +266,7 @@ def get_create_total_angle:
 
 @accepts(int)
 @cast_to(c_int)
-def get_create_total_angle(angle):
+def set_create_total_angle(angle):
     _create.set_create_total_angle(angle)
 
 @returns(int)
