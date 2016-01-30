@@ -1,3 +1,6 @@
+from ctypes import CDLL, c_int, c_char
+from decorators import accepts, returns, cast_to
+
 "_create = I DONT KNOW"
 
 BEGIN CREATE FUNCTIONS
