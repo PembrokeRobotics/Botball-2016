@@ -4,7 +4,6 @@ from decorators import accepts, returns, cast_to
 _create = ctypes.CDLL("libwallaby.so")
 
 r'''
-
 /*!
  * Waits to establish a connection to the create.
  * \blocksuntil A connection to a create is established
@@ -26,7 +25,7 @@ r'''
  * \ingroup create
  */
  void create_disconnect();
- 
+
 BEGIN CREATE FUNCTIONS
  void create_disconnect();
  void create_start();
@@ -109,29 +108,29 @@ BEGIN CREATE FUNCTIONS
  int create_read_block(char *data, int count);
  void create_write_byte(char byte);
  void create_clear_serial_buffer();
- 
+
 '''
-def create_disconnect:
+def create_disconnect():
     '"disconnects the create"'
     _create.create_disconnect()
 
-def create_start:
+def create_start():
     "starts the create"
     _create.create_start()
 
-def create_passive:
+def create_passive():
     _create.create_passive()
 
-def create_safe:
+def create_safe():
     _create.create_safe()
 
-def create_full:
+def create_full():
     _create.create_full()
 
-def create_spot:
+def create_spot():
     _create.create_spot()
 
-def create_cover:
+def create_cover():
     _create.create_cover()
 
 @accepts(int)
@@ -139,123 +138,123 @@ def create_cover:
 def create_demo(d):
     _create.create_demo(d)
 
-def create_cover_dock:
+def create_cover_dock():
     _create.create_cover_dock()
 
 @returns(int)
-def get_create_mode:
+def get_create_mode():
     return int(_create.get_create_mode())
 
 @returns(int)
-def get_create_lbump:
+def get_create_lbump():
     return int(_create.get_create_lbump())
 
 @returns(int)
-def get_create_rbump:
+def get_create_rbump():
     return int(_create.get_create_rbump())
 
 @returns(int)
-def get_create_lwdrop:
+def get_create_lwdrop():
     return int(_create.get_create_lwdrop())
 
 @returns(int)
-def get_create_cwdrop:
+def get_create_cwdrop():
     return int(_create.get_create_cwdrop())
 
 @returns(int)
-def get_create_rwdrop:
+def get_create_rwdrop():
     return int(_create.get_create_rwdrop())
 
 @returns(int)
-def get_create_wall:
+def get_create_wall():
     return int(_create.get_create_wall())
 
 @returns(int)
-def get_create_lfcliff:
+def get_create_lfcliff():
     return int(_create.get_create_lfcliff())
 
 @returns(int)
-def get_create_rfcliff:
+def get_create_rfcliff():
     return int(_create.get_create_rfcliff())
 
 @returns(int)
-def get_create_rcliff:
+def get_create_rcliff():
     return int(_create.get_create_rcliff())
 
 @returns(int)
-def get_create_lcliff:
+def get_create_lcliff():
     return int(_create.get_create_lcliff())
 
 @returns(int)
-def get_create_llightbump:
+def get_create_llightbump():
     return int(_create.get_create_llightbump())
 
 @returns(int)
-def get_create_lflightbump:
+def get_create_lflightbump():
     return int(_create.get_create_lflightbump())
 
 @returns(int)
-def get_create_lclightbump:
+def get_create_lclightbump():
     return int(_create.get_create_lclightbump())
 
 @returns(int)
-def get_create_rclightbump:
+def get_create_rclightbump():
     return int(_create.get_create_rclightbump())
 
 @returns(int)
-def get_create_rflightbump:
+def get_create_rflightbump():
     return int(_create.get_create_rflightbump())
 
 @returns(int)
-def get_create_rlightbump:
+def get_create_rlightbump():
     return int(_create.get_create_rlightbump())
 
 @returns(int)
-def get_create_llightbump_amt:
+def get_create_llightbump_amt():
     return int(_create.get_create_llightbump_amt())
 
 @returns(int)
-def get_create_lflightbump_amt:
+def get_create_lflightbump_amt():
     return int(_create.get_create_lflightbump_amt())
 
 @returns(int)
-def get_create_lclightbump_amt:
+def get_create_lclightbump_amt():
     return int(_create.get_create_lclightbump_amt())
 
 @returns(int)
-def get_create_rclightbump_amt:
+def get_create_rclightbump_amt():
     return int(_create.get_create_rclightbump_amt())
 
 @returns(int)
-def get_create_rflightbump_amt:
+def get_create_rflightbump_amt():
     return int(_create.get_create_rflightbump_amt())
 
 @returns(int)
-def get_create_rlightbump_amt:
+def get_create_rlightbump_amt():
     return int(_create.get_create_rlightbump_amt())
 
 @returns(int)
-def get_create_vwall:
+def get_create_vwall():
     return int(_create.get_create_vwall())
 
 @returns(int)
-def get_create_overcurrents:
+def get_create_overcurrents():
     return int(_create.get_create_overcurrents())
 
 @returns(int)
-def get_create_infrared:
+def get_create_infrared():
     return int(_create.get_create_infrared())
 
 @returns(int)
-def get_create_advance_button:
+def get_create_advance_button():
     return int(_create.get_create_advance_button())
 
 @returns(int)
-def get_create_play_button:
+def get_create_play_button():
     return int(_create.get_create_play_button())
 
 @returns(int)
-def get_create_normalized_angle:
+def get_create_normalized_angle():
     return int(_create.get_create_normalized_angle())
 
 @accepts(int)
@@ -264,7 +263,7 @@ def set_create_normalized_angle(angle):
     _create.set_create_normalized_angle(angle)
 
 @returns(int)
-def get_create_total_angle:
+def get_create_total_angle():
     return int(_create.get_create_total_angle())
 
 @accepts(int)
@@ -273,7 +272,7 @@ def set_create_total_angle(angle):
     _create.set_create_total_angle(angle)
 
 @returns(int)
-def get_create_distance:
+def get_create_distance():
     return int(_create.get_create_distance())
 
 @accepts(int)
@@ -282,90 +281,90 @@ def set_create_distance(dist):
     _create.set_create_distance(dist)
 
  @returns(int)
- def get_create_battery_charging_state:
+ def get_create_battery_charging_state():
      return int(_create.get_create_battery_charging_state())
 
 @returns(int)
-def get_create_battery_voltage:
+def get_create_battery_voltage():
     return int(_create.get_create_battery_voltage())
 
 @returns(int)
-def get_create_battery_current:
+def get_create_battery_current():
     return int(_create.get_create_battery_current())
 
 @returns(int)
-def get_create_battery_temp:
+def get_create_battery_temp():
     return int(_create.get_create_battery_temp())
 
 @returns(int)
-def get_create_battery_charge:
+def get_create_battery_charge():
     return int(_create.get_create_battery_charge())
 
 @returns(int)
-def get_create_battery_capacity:
+def get_create_battery_capacity():
     return int(_create.get_create_battery_capacity())
 
 @returns(int)
-def get_create_normalized_angle:
+def get_create_normalized_angle():
     return int(_create.get_create_normalized_angle())
 
 @returns(int)
-def get_create_wall_amt:
+def get_create_wall_amt():
     return int(_create.get_create_wall_amt())
 
 @returns(int)
-def get_create_lfcliff_amt:
+def get_create_lfcliff_amt():
     return int(_create.get_create_lfcliff_amt())
 
 @returns(int)
-def get_create_rfcliff_amt:
+def get_create_rfcliff_amt():
     return int(_create.get_create_rfcliff_amt())
 
 @returns(int)
-def get_create_rcliff_amt:
+def get_create_rcliff_amt():
     return int(_create.get_create_rcliff_amt())
 
 @returns(int)
-def get_create_lcliff_amt:
+def get_create_lcliff_amt():
     return int(_create.get_create_lcliff_amt())
 
 @returns(int)
-def get_create_bay_DI:
+def get_create_bay_DI():
     return int(_create.get_create_bay_DI())
 
 @returns(int)
-def get_create_bay_AI:
+def get_create_bay_AI():
     return int(_create.get_create_bay_AI())
 
 @returns(int)
-def get_create_song_number:
+def get_create_song_number():
     return int(_create.get_create_song_number())
 
 @returns(int)
-def get_create_song_playing:
+def get_create_song_playing():
     return int(_create.get_create_song_playing())
 
 @returns(int)
-def get_create_number_of_stream_packets:
+def get_create_number_of_stream_packets():
     return int(_create.get_create_number_of_stream_packets())
 
 @returns(int)
-def get_create_requested_velocity:
+def get_create_requested_velocity():
     return int(_create.get_create_requested_velocity())
 
 @returns(int)
-def get_create_requested_radius:
+def get_create_requested_radius():
     return int(_create.get_create_requested_radius())
 
 @returns(int)
-def get_create_requested_right_velocity:
+def get_create_requested_right_velocity():
     return int(_create.get_create_requested_right_velocity())
 
 @returns(int)
-def get_create_requested_left_velocity:
+def get_create_requested_left_velocity():
     return int(_create.get_create_requested_left_velocity())
 
-def create_stop:
+def create_stop():
     _create.create_stop()
 
 @accepts(int, int)
@@ -449,5 +448,5 @@ def create_read_block(*data, count):
 def create_write_byte(byte):
     _create.create_write_byte(byte)
 
-def create_clear_serial_buffer:
+def create_clear_serial_buffer():
     _create.create_clear_serial_buffer()
