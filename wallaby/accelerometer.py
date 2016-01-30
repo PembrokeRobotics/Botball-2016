@@ -16,7 +16,7 @@
     module for wrapping all necessary wallaby functions
 """
 
-from ctypes import CDLL
+from ctypes import CDLL, c_short
 from decorators import returns
 
 #CDLL assumes that all functions return a c_int
