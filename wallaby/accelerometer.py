@@ -16,8 +16,8 @@
     module for wrapping all necessary wallaby functions
 """
 
-from ctypes import CDLL, c_int, c_short
-from decorators import accepts, returns, cast_to
+from ctypes import CDLL
+from decorators import returns
 
 #CDLL assumes that all functions return a c_int
 _wallaby = CDLL("libwallaby.so")
