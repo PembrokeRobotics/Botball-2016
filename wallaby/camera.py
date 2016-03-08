@@ -1,7 +1,7 @@
-from ctypes import CDLL, c_int
+from ctypes import CDLL, c_int, Structure
 from decorators import accepts, returns, cast_to
 
-_wallaby = CDLL("libwallaby.so")
+_wallaby = CDLL("libwallaby.so",use_errno=True)
 
 """
 BEGIN CAMERA FUNCTIONS
@@ -47,3 +47,47 @@ def get_object_center_x(channel, object):
 def get_object_center_y(channel, object):
     """gets the center y (row) coordinate value for the object # of the color channel"""
     return int(_wallaby.get_object_center_y(channel, object))
+
+def get_camera_width():
+    '''gets the width of the camera view'''
+    return int(_wallaby.get_camera_width())
+
+def get_camera_height():
+    '''gets the height of the camera view'''
+    return int(_wallaby.get_camera_height())
+
+'''
+typedef struct pixel
+{
+	int r;
+	int g;
+	int b;
+} pixel;
+
+typedef struct point2
+20	{
+21		int x;
+22		int y;
+23	} point2;
+
+'''
+class Pixel(Structure):
+    _fields_ = [("r", c_int),
+                ("g", c_int),
+                ("b", c_int)]
+
+class Point2D(Structure):
+    _fields_ = [("x", c_int),
+                ("y", c_int)]
+
+
+@accepts(int, int)
+def get_camera_pixel(x, y):
+    '''
+    gets r, g, b value of pixel
+    '''
+
+    _wallaby.get_camera_pixel.restype = Point2D
+    pixel = Point2D(x, y)
+
+    return _wallaby.get_camera_pixel(pixel)
