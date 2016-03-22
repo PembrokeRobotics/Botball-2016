@@ -12,15 +12,15 @@ class Tasker(object):
         '''
         add a task to the task list
 
-        new_task must be a function and that function must take zero argss
+        new_task must be a callable and that callable must take zero argss
         '''
-        if type(new_task) == types.FunctionType and \
-                             not inspect.getargspec(new_task).args:
+        if hasattr(possible_function, '__call__') and \
+            not inspect.getargs(new_task).args:
 
             self.task_list.appendleft(new_task)
         else:
-            raise TypeError("please make sure that the task is a function \
-                             and that that function takes zero args")
+            raise TypeError("please make sure that the task is a callable \
+                             and that that callable takes zero args")
     def add_multiple_tasks(self, *new_tasks):
         '''
         adds multiple tasks in order
