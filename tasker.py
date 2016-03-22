@@ -26,9 +26,7 @@ class Tasker(object):
         adds multiple tasks in order
         '''
         for task in new_tasks:
-            if type(task) == types.FunctionType and \
-                             not inspect.getargspec(task).args:
-                self.task_list.append(task)
+            self.add_single_task(task)
     def run_next(self):
         '''
         runs the task at the top of the deque
