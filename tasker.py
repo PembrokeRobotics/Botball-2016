@@ -1,26 +1,45 @@
 import collections
 import types
 import inspect
+import functools
 
 class Tasker(object):
     '''
     class to simplify running tasks in order
     '''
+
     def __init__(self):
         self.task_list = collections.deque()
+
     def add_single_task(self, new_task):
         '''
         add a task to the task list
 
-        new_task must be a callable and that callable must take zero argss
+        new_task must be either a function or a partial
+        and that function or partial must take zero args
         '''
-        if hasattr(possible_function, '__call__') and \
-            not inspect.getargs(new_task).args:
 
-            self.task_list.appendleft(new_task)
+        #check that runs if it is a partial
+        if isinstance(new_task, functools.partial):
+            len_original_func_arguments    = len(inspect.getargspec(new_task.func).args)
+            number_of_partialed_arguments  = len(new_task.args)
+
+            if (len_original_func_arguments - number_of_partialed_arguments) == 0:
+                self.task_list.appendleft(new_task)
+            else:
+                raise TypeError("Make sure that the passed partial takes no arguments")
+
+        #check that runs if it is a pure function
+        elif isinstance(new_task, types.FunctionType):
+            if not inspect.getargspec(new_task).args:
+                self.task_list.appendleft(new_task)
+            else:
+                raise TypeError("Make sure that the passed function takes no arguments")
+
         else:
-            raise TypeError("please make sure that the task is a callable \
-                             and that that callable takes zero args")
+            raise TypeError("Make sure that the passed task is a functon or partial")
+
+
     def add_multiple_tasks(self, *new_tasks):
         '''
         adds multiple tasks in order
@@ -34,13 +53,15 @@ class Tasker(object):
         if the deque is empty raises IndexError
 
         will not catch any exceptions the task raises
+
+        will also return any return value of the function
         '''
         try:
             next_task = self.task_list.pop()
         except IndexError:
             raise IndexError("No more Tasks to run")
 
-        next_task()
+        return next_task()
     def run_all(self):
         while True:
             try:
