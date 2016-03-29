@@ -32,7 +32,8 @@ def run_plow_while_poms():
 
     #very light wrapper on the channel int that lets me less clunkily get count
     class Channel(int):
-        def get_count(self):
+        @property
+        def count(self):
             return wallaby.get_object_count(self)
 
     green_channel = Channel(GREEN_POM_CHANNEL)
@@ -41,7 +42,7 @@ def run_plow_while_poms():
     #whiles are technically a while True with an if clause
     #therefore, for whatever reason we can put an else
     #and that else will only be executed if we entered then exited the loop
-    while(red_channel.get_count() > 0 or green_channel.get_count() > 0):
+    while(red_channel.count > 0 or green_channel.count > 0):
         turn_on_pom_plow()
         time.sleep(50)
     else:
