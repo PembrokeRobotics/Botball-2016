@@ -34,6 +34,7 @@ def run_plow_while_poms():
     class Channel(int):
         @property
         def count(self):
+            wallaby.camera_update()
             return wallaby.get_object_count(self)
 
     green_channel = Channel(GREEN_POM_CHANNEL)
