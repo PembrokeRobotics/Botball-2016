@@ -1,0 +1,214 @@
+#include <kipr/botball.h>
+int ONE_EIGHTH_TURN = 50;
+int EXTRA_POWER = 450;
+void reach(int x1, int y1, int x2, int y2)
+{
+    int i = 0;
+    int xint,yint;
+    xint = (int)((x2-x1)/20);
+    yint = (int)((y2-y1)/20);
+    while(i < 20)
+    {
+        set_servo_position(0,x1+xint*i);
+        set_servo_position(1,y1+yint*i);
+        wait_for_milliseconds(150);
+        i++;
+    }
+}
+void set_servos(int x, int y)
+{
+    set_servo_position(0,x);
+    set_servo_position(1,y);
+}
+void move_forwards(int x,double d)
+{
+    set_create_distance(0);
+    while(get_create_distance()<x){
+        create_drive_direct(100*d,100*d);
+    }
+    create_stop();
+}
+void move_backwards(int x,double d)
+{
+    set_create_distance(0);
+    while(get_create_distance()>-x){
+        create_drive_direct(-100*d,-100*d);
+    }
+    create_stop();
+}
+void move_forwards_until_bumped(double d)
+{
+    while(get_create_lbump() == 0 && get_create_rbump() == 0)
+    {
+    	create_drive_direct(100*d, 100*d);
+    }
+    create_stop();
+}
+void turn_left(double d,double m)
+{
+    set_create_total_angle(0);
+    while(get_create_total_angle()<d*ONE_EIGHTH_TURN)
+    {
+        create_drive_direct(-100,100);
+    }
+    create_stop();
+}
+void turn_right(double d,double m)
+{
+    set_create_total_angle(0);
+    while(get_create_total_angle()>-d*ONE_EIGHTH_TURN)
+    {
+        create_drive_direct(100*m,-100*m);
+    }
+    create_stop();
+}
+int main()
+{
+    wait_for_light(0);
+    create_connect();
+    shut_down_in(119);
+    //create_disconnect(119);
+    enable_servos();
+    set_servos(0,0);
+    move_backwards(200,1);
+    move_forwards(100,3);
+    turn_left(2,3);
+    move_forwards_until_bumped(4);
+    move_backwards(180,3);
+    turn_right(2,3);
+    move_backwards(200,1);
+    move_forwards(1200,3);
+    turn_left(6,2);
+    move_backwards(300,2);
+    move_forwards(200,1);
+    turn_left(4,4);
+    int n = 0;
+    while(n <20)
+    {
+        n++;
+        set_servo_position(0,n*100);
+        wait_for_milliseconds(100);
+    }
+    set_create_distance(0);
+    //closes trapper part 2 (moves up slightly above ground)
+    wait_for_milliseconds(500);
+   	set_servo_position(0,1647);
+   	set_servo_position(1,500);
+    turn_right(2,.5);
+    set_servos(1600,2047);
+    move_forwards_until_bumped(4);
+    turn_right(4,1);
+    move_backwards(200,1);
+    move_forwards(300,1);
+    turn_left(2,1);
+    move_forwards_until_bumped(2);
+    move_backwards(100,2);
+    int m = 0;
+    //moves to up position
+    while(m<2){
+    	set_servo_position(0,1050 - m*200); //take out 100 if too powerful
+        set_servo_position(1,2050+ m*200);
+
+    	wait_for_milliseconds(250);
+ 
+		int n = 0;
+    	while(n<20){
+        	n++;
+        	set_servo_position(0,1000+n*20 + m*30 + EXTRA_POWER);
+        	set_servo_position(1,2100-n*30 + m*40 - EXTRA_POWER);
+        	wait_for_milliseconds(150);
+    	}
+        m++;
+    }
+    
+    move_backwards(400,3);
+    turn_right(2,3);
+    move_backwards(300,2);
+    move_forwards(700,7);
+    turn_left(2,1);
+    move_backwards(300,1);
+    set_servos(1600,900);
+    int x = 180;
+    move_forwards(x,1);
+    turn_left(.9,1);
+    move_backwards(x*sqrt(2),1);
+    
+    n=0;
+    while(n<20) //puts down bucket
+    {
+        set_servo_position(0,1241 + n*15);
+        set_servo_position(1,475 - n*20);
+        wait_for_milliseconds(200);
+        n++;
+    }
+    n = 0;
+    set_servos(1000,10);
+    while(n<10)
+    {
+        wait_for_milliseconds(10);
+        set_servos(1000-100*n,10-n);
+        n++;
+    }
+    wait_for_milliseconds(250);
+    while(n<20)
+    {
+        set_servo_position(0,n*90);
+        set_servo_position(1,n*25);
+        wait_for_milliseconds(100);
+        n++;
+    }
+    turn_right(.1,1);
+    move_forwards(300,3);
+    move_backwards(300,3);
+    move_forwards(300,3);
+    move_backwards(300,3);
+    turn_left(.1,1);
+    n = 0;
+    while(n <20) //picks up bucket
+    {
+        n++;
+        set_servos(n*100,0);
+        wait_for_milliseconds(150);
+    }
+    set_servos(1640,900);
+    move_forwards(200,1);
+    turn_left(1,.5);
+    move_forwards_until_bumped(3);
+    move_backwards(300,1);
+    turn_right(2,1);
+    move_forwards_until_bumped(2);
+    move_backwards(100,2);
+    m = 0;
+    //moves to up position
+    while(m<2){
+    	set_servo_position(0,1050 - m*200); //take out 100 if too powerful
+        set_servo_position(1,2050+ m*200);
+
+    	wait_for_milliseconds(500);
+ 
+		int n = 0;
+    	while(n<20){
+        	n++;
+        	set_servo_position(0,1000+n*20 + m*30 + EXTRA_POWER);
+        	set_servo_position(1,2100-n*30 + m*40 - EXTRA_POWER);
+        	wait_for_milliseconds(150);
+    	}
+        m++;
+    }
+    move_backwards(500,2);
+    set_servos(0,0);
+    turn_right(2,3);
+    move_backwards(500,1);
+    move_forwards_until_bumped(3);
+    turn_right(1.8,4);
+    move_backwards(500,2);
+    move_forwards(50,1);
+    turn_right(2,2);
+    move_forwards(400,3);
+    
+    disable_servos();
+    create_disconnect();
+    
+    return 0;
+}
+
